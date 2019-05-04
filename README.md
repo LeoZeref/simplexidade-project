@@ -1,0 +1,2 @@
+# simplexidade-project
+simplex calculator
