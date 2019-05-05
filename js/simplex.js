@@ -61,8 +61,8 @@ function solveSimplex(quantDec,quantRes,choice){
 	}
 
     //show initial matriz
-	matrizToTable(matrizSimplex,"Inicial",varsOnHead,varsOnBase,rowsCount,allTables,0);
-	tablesCount++
+	// matrizToTable(matrizSimplex,"Inicial",varsOnHead,varsOnBase,rowsCount,allTables,0);
+	// tablesCount++
 
 	//do it while Z row has negative numbers
 	do{
@@ -105,15 +105,15 @@ function solveSimplex(quantDec,quantRes,choice){
 
 		//show parcial matriz 
 		if(hasNegativeOrPositive == true){
-			matrizToTable(matrizSimplex,"Parcial"+stopConditionValue,varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
+			// matrizToTable(matrizSimplex,"Parcial"+stopConditionValue,varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
 			tablesCount++
 		}
 
 	}while(hasNegativeOrPositive == true);
 
 
-	matrizToTable(matrizSimplex,"Final",varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
-	senseTable(matrizSimplex,varsOnHead,varsOnBase,quantDec,bValues)
+	// matrizToTable(matrizSimplex,"Final",varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
+	// senseTable(matrizSimplex,varsOnHead,varsOnBase,quantDec,bValues);
 	if(choice == 1){
 		$(".container").append(allTables[stopConditionValue]);
 		printResults(matrizSimplex,quantDec,quantRes,columnsCount,varsOnBase);
@@ -322,7 +322,7 @@ function printResults(matriz,quantDec,quantRes,columnsCount,base){
 	for (let i = 0; i < quantRes ; i++) {
 		var baseName = base[i];
 		var baseValue = matriz[i][columnsCount-1];
-		$("#results").append('<div>'+baseName+'='+baseValue+'</div>')
+		$("#results").append('<div>'+baseName+'= '+baseValue+'</div>')
 	}
 
 }
@@ -526,7 +526,7 @@ function firstPhase(){
 	$(document).ready(function () {
 		
 		//get amount of decisions variables
-		var quantDec = $("input[name=quantDecision]").val();
+		var quantDec = $("input[name=quantidade-variaveis]").val();
 		if( quantDec.length == 0 || quantDec == '0') {
 			alert('Você precisa inserir alguma quantia em variavel de decisão');	
 			return;	
@@ -538,7 +538,7 @@ function firstPhase(){
 		}
 
 		//get amount of restrictions
-		var quantRes = $("input[name=quantRestriction]").val();
+		var quantRes = $("input[name=quantidade-restricoes]").val();
 		if( quantRes.length == 0 || quantRes == '0') {
 			alert('Você precisa inserir alguma quantia em variavel de restrição');	
 			return;	
@@ -564,7 +564,7 @@ function firstPhase(){
 		$(".container").append('<div id="solution" class="row"></div>')
 		$(".container").append('<br><div class="row"><div id="results" class="col-md"></div></div>');
 
-		$("#buttons").append('<div class="col-md-6"><button id="stepByStep" onclick="solveSimplex('+quantDec+','+quantRes+',2)" class="btn btn-primary">Passo a Passo</button></div>');
+		// $("#buttons").append('<div class="col-md-6"><button id="stepByStep" onclick="solveSimplex('+quantDec+','+quantRes+',2)" class="btn btn-primary">Passo a Passo</button></div>');
 
 	});
 }
