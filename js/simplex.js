@@ -1,5 +1,3 @@
-//mvp dia 10/5 methods
-
 // solve the simplex algorithm
 function solveSimplex(quantDec,quantRes,choice){
 	$("#inputValues").hide();
@@ -579,15 +577,15 @@ function generateFunctionZ(quantDec){
 	$("#inputValues").append('<br><div class="row"><div class="input-group d-flex justify-content-center mb-3" id="funcZ"></div></div>');
 
 	
-	$("#funcZ").append('<h2>Função Z =</h2><span class="px-2">');
+	$("#funcZ").append('<span>Z =</span><span class="px-2">');
 	// adds the function Z inputs to the body of the page 	
 	for (let i = 1; i <= quantDec; i++) {
 
 		$("#funcZ").append('<input type="number" name="valX'+i+'">');
 		if(i != quantDec){
-			$("#funcZ").append('<div class="input-group-append"><span class="input-group-text">x'+ i +'</span></div><span class="px-2"><span><button tabindex=-1 class="btn btn-success btn-lg">+</button>');
+			$("#funcZ").append('<span class="m-1">x'+ i +'</span><span class="px-2"><span><div tabindex=-1 class="">+</div>');
 		}else{
-			$("#funcZ").append('<div class="input-group-append"><span class="input-group-text">x'+ i +'</span></div>');
+			$("#funcZ").append('<span class="m-1">x'+ i +'</span>');
 		}
 	}
 	var input = $('input[name="valX1"]');
@@ -611,13 +609,13 @@ function generateRestrictions(quantDec,quantRes){
 			for (let j = 1; j <= quantDec; j++) {
 				$("#divRes"+i+"").append('<input type="number" name="X'+j+'_res'+i+'" " >');
 				if(j != quantDec){
-					$("#divRes"+i).append('<div class="input-group-append"><span class="input-group-text">x'+ j +'</span></div><span class="px-2"><span><button tabindex=-1 class="btn btn-success btn-lg">+</button>');
+					$("#divRes"+i).append('<span class="m-1">x'+ j +'</span><span class="px-2"><span><div tabindex=-1 class="">+</div>');
 				}else{
-					$("#divRes"+i).append('<div class="input-group-append"><span class="input-group-text">x'+ j +' </span></div>');
+					$("#divRes"+i).append('<span class="m-1">x'+ j +' </span>');
 				}
 			}
 		//adds to the body the '<=' expression and the restriction value input
-		$("#divRes"+i).append('<span class="px-2"></span><div class="input-group-prepend"><span class="input-group-text"><b>&le;</b></span></div><input type="number" name="valRestriction'+i+'">');
+		$("#divRes"+i).append('<span class="px-2"></span><div class="input-group-prepend"><span class="mx-2"><b>&le;</b></span></div><input type="number" name="valRestriction'+i+'">');
 	}
 
 	

@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
@@ -18,63 +19,51 @@
 
   </head>
   <body>
-		<nav class="navbar navbar-light bg-primary col-md-12">
-			<span class="navBar">Simplexidade</span>
+		<nav class="navbar col-md-12">
+			<span class="text-light">Simplexidade</span>
 			<button onclick="location.reload();" class="btn btn-secondary">Reiniciar</button>
 		</nav>
 		<br>	
 	  <div class="container align-itens-center">
 			<div id="startInputs">
+				<div class="row">
+					<div class="col-md-12">
+						<p>Este programa consiste na resolução de problemas de maximização e minimização através da utilização do Simplex. Primeiro coloque as quantidades de variáveis, de restriçoes e iterações máximas. Depois coloque os valores das variáveis e das restrições.</p>
+					</div>
+				  	<div class="col-md-12">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="max" name="maxMin" class="custom-control-input" checked>
+							<label class="custom-control-label m-2" for="max">Maximizar</label>
+					  	</div>
+					  	<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="min" name="maxMin" class="custom-control-input">
+							<label class="custom-control-label m-2" for="min">Minimizar</label>
+					  	</div>
+				  	</div>
+				</div>
 			  	<div class="row">	 
-				  	<div class="col-md-3">
-						  
+				  	<div class="col-md-4">  
 						<div class="custom-control">
-							<button class="btn" onclick="mostrarVariaveis();">Variaveis</button>
-							<input type="text" class="form-control"  id="quantidade-variaveis" name="quantidade-variaveis" style="display: none;">
-						  </div>
-						 
-
+							<input placeholder="Quantidade de variáveis" type="text" class="form-control m-2"  id="quantidade-variaveis" name="quantDecision">
+					  	</div>				
 				  	</div>
-				  	<div class="col-md-3">
-						  
+				  	<div class="col-md-4">				  
 						<div class="custom-control">
-							<button class="btn" onclick="mostrarRestricoes();" >Restrições</button>
-							<input type="text" class="form-control" id="quantidade-restricoes" name="quantidade-restricoes" style="display: none;">
-						  </div>
-						 
-
+							<input placeholder="Quantidade de restrições" type="text" class="form-control m-2" id="quantidade-restricoes" name="quantRestriction">
+					  	</div>
 				  	</div>
-				  	<div class="col-md-3">
-						  
+				  	<div class="col-md-4">  
 						<div class="custom-control">
-							
-							<button class="btn" onclick="mostrarIteracoes();" >Iterações</button>
-							<input type="text" class="form-control" id="quantidade-iteracoes" name="quantidade-iteracoes" style="display: none;">
-						  </div>
-						 
-
-				  	</div>
-				  	<div class="col-md-3">
-						  
-						<div class="custom-control">
-							<label class="custom-control-label" for="max">Objetivo</label>
-							<select id="max" name="maxMin" class="form-control" checked>
-								<option value="max" >Maximizar</option>
-								<option value="min">Minimizar</option>
-							</select>
-						  </div>
-						 
-
+							<input placeholder="Quantidade de Iterações" type="text" class="form-control m-2" id="quantidade-iteracoes" name="iMax">
+					  	</div>	
 				  	</div>
 				</div>
 				<br>
 				<div class="row">	 
 				  	<div class="col-md-12">
-						  
 					  <div class="custom-control custom-radio custom-control-inline">
-					  	<button id="firstPhase" onclick="verifyValues()"class="btn btn-primary">Próximo Passo</button>
+					  	<button id="firstPhase" onclick="verifyValues()"class="btn btn-primary">Colocar valores</button>
 					  </div>
-
 				  	</div>
 				</div>
 				<br>
@@ -93,27 +82,11 @@
 				$('#quantidade-restricoes').val() < 1  ||
 				$('#quantidade-variaveis').val() > 10 ||
 				$('#quantidade-variaveis').val() < 1) {
-				alert('Quantidade de variáveis de Desição ou Restrição maior que 10 ou menor que 1');
+				alert('Quantidade de variáveis de Decisão ou Restrição maior que 10 ou menor que 1');
 			} else {
 				firstPhase()
 			}
 		}
-
-		function mostrarVariaveis(){		
-			document.getElementById("quantidade-variaveis").style.display = "block";
-
-		}
-
-		function mostrarRestricoes(){		
-			document.getElementById("quantidade-restricoes").style.display = "block";
-
-		}
-		function mostrarIteracoes(){		
-			document.getElementById("quantidade-iteracoes").style.display = "block";
-
-		}
-
-
 	</script>
   </body>
 </html>

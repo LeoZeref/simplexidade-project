@@ -1,13 +1,12 @@
 @font-face {
-	font-family: signika;
-	src: url('./fonts/signika/Signika-Light.otf');
+	font-family: 'Quicksand', sans-serif;
 }
 
 body{
-	font-family: signika;
+	font-family: Quicksand;
 	text-align: center;
-	background: rgb(6, 50, 70);
-	color: #fff;
+	background: rgb(240, 230, 240);
+	color: #000;
 	transition: background-color 5s ease;
 	font-size: 20pt;
 }
@@ -20,7 +19,9 @@ hr{
 .hint { display: none; color: gray; font-style: italic; }
 input#iMax:focus + .hint { display :  block }
 
-
+.navbar {
+	background-color: rgb(51, 133, 196);
+}
 
 #tableInicial{
 	margin-top: 10px;
@@ -61,7 +62,7 @@ input{
 	border-radius: 3px;
 }
 span.input-group-text{
-	font-size: 22pt;
+	font-size: 10pt;
 }
 
 button#firstPhase, button#solveSimplex, button#stepByStep, button#again {
