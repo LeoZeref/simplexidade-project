@@ -140,6 +140,124 @@ function getLowerNumberAndColumn(matriz,rowCount,columnCount){
 	return [lowerNumber , column] ;
 }
 
+function senseTable(matriz, head, base,quantDec,bValues){
+
+
+	var matrizTable = [];
+	var headTable   = [];
+	var baseTable   = [];
+
+	var restNames  = []
+	var restValues = []
+	var minMaxValues = []
+
+
+	for (let i = 0; i < matriz.length; i++){
+    	matrizTable[i] = matriz[i].slice();
+	}
+
+	for (let i = 0; i < head.length; i++){
+    	headTable[i] = head[i].slice();
+	}
+
+	for (let i = 0; i < base.length; i++){
+    	baseTable[i] = base[i].slice();
+	}
+
+
+	matrizTable.unshift(headTable);
+
+	for (let i = 1, j=0; i <= rowsCount; i++, j++){
+		matrizTable[i].unshift(baseTable[j]);
+	} 
+
+
+	for(let i = quantDec + 1,k=0; i < matrizTable[0].length -1;k++,i++){
+		restNames.push(matrizTable[0][i])
+		restValues.push(matrizTable[matrizTable.length -1][i])
+		let auxArray = new Array;
+		for(let j = 1; j < matrizTable.length -1 ; j++){
+			let bCol     = matrizTable[j][matrizTable[0].length-1]
+			let restCol  = matrizTable[j][i]
+
+			auxArray.push((bCol/restCol)* -1);
+		}
+		let minPos = Number.POSITIVE_INFINITY;
+		let maxNeg = Number.NEGATIVE_INFINITY;
+		for(let j = 0; j< auxArray.length;j++){
+			if(auxArray[j] > 0 && auxArray[j] < minPos ){
+				minPos = auxArray[j] 
+			}else if(auxArray[j] < 0 && auxArray[j] > maxNeg ){
+				maxNeg = auxArray[j]
+			}	
+		}
+		if(minPos === Number.POSITIVE_INFINITY ){
+			minPos = 0
+		}
+		if(maxNeg === Number.NEGATIVE_INFINITY ){
+			maxNeg = 0
+		}
+		minMaxValues.push([maxNeg + bValues[k] ,minPos + bValues[k]])
+	}
+
+	var senseMatriz = [];
+
+	for(let i = 0; i< matrizTable.length-2; i++ ){
+		let auxArray  = new Array;
+		auxArray.push(restNames[i])
+		auxArray.push(restValues[i])
+		senseMatriz.push(auxArray)
+	}
+
+	for(let i = 0; i< senseMatriz.length; i++ ){
+		for(let j = 0; j < minMaxValues[0].length; j++){
+			senseMatriz[i].push(minMaxValues[i][j])
+		}
+		senseMatriz[i].push(bValues[i]);
+	}
+
+
+
+	senseMatriz.unshift(['Recursos','Preco Sombra','Min','Max','Inicial']);
+	$(".container").append('<div class="row"><h3>Tabela Final</h3></div>')
+	$(".container").append('<div class="row"><div id="divFinalTableBegin" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><table id="finalTableBegin" class="table table-bordered"></table></div></div>')
+	var table = $("#finalTableBegin");
+	var row, cell;
+
+	for(let i=0; i< matrizTable.length; i++){
+		row = $( '<tr />' );
+		table.append( row );
+		for(let j=0; j<matrizTable[i].length; j++){
+			if(!isNaN(matrizTable[i][j])){
+				cell = $('<td>'+ (Math.round(matrizTable[i][j]*100)/100 ) +'</td>')
+			}else{
+				cell = $('<td>'+matrizTable[i][j]+'</td>')
+			}
+
+			row.append( cell );
+		}
+	}
+
+	$(".container").append('<hr><div class="row"><h3>Tabela de Sensibilidade</h3></div>')
+	$(".container").append('<div class="row"><div id="divSenseTable" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><table id="senseTable" class="table table-bordered"></table></div></div><hr>')
+	var table = $("#senseTable");
+	var row, cell;
+
+	for(let i=0; i< senseMatriz.length; i++){
+		row = $( '<tr />' );
+		table.append( row );
+		for(let j=0; j<senseMatriz[i].length; j++){
+			if(!isNaN(senseMatriz[i][j])){
+				cell = $('<td>'+ (Math.round(senseMatriz[i][j]*100)/100 ) +'</td>')
+			}else{
+				cell = $('<td>'+senseMatriz[i][j]+'</td>')
+			}
+
+			row.append( cell );
+		}
+	}
+}
+
 //null the column elements 
 function nullColumnElements(matriz, pivoRow, pivoColumn,rowsCount, columnsCount){
 
@@ -195,6 +313,58 @@ function staticTableVars(quantDec,quantRes){
 	head.push("b");
 	
 	return [base, head];
+}
+
+function matrizToTable(matriz, divName, head, base, rowsCount, allTables, aux){
+	$("#auxDiv").html('<div class="row"><div id="divTable'+divName+'" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><div class="row"><h3>Tabela '+divName+':</h3></div><table id="table'+divName+'" class="table table-bordered"></table></div></div>')
+	var table = $("#table"+divName);
+	var row, cell;
+
+	//copy the matriz, base and head values
+	var matrizTable = [];
+	var headTable   = [];
+	var baseTable   = [];
+
+	for (let i = 0; i < matriz.length; i++){
+    	matrizTable[i] = matriz[i].slice();
+	}
+
+	for (let i = 0; i < head.length; i++){
+    	headTable[i] = head[i].slice();
+	}
+
+	for (let i = 0; i < base.length; i++){
+    	baseTable[i] = base[i].slice();
+	}
+
+
+	$("#solveSimplex").remove();
+	$("#stepByStep	").remove();
+
+	//the matriz receives the head and base vars
+	//appends head vars into matriz
+	matrizTable.unshift(headTable);
+	//set base vars at the beggining of each the matriz rows
+	for (let i = 1, j=0; i <= rowsCount; i++, j++){
+		matrizTable[i].unshift(baseTable[j]);
+	} 
+
+	//creates the table
+	for(let i=0; i<matrizTable.length; i++){
+		row = $( '<tr />' );
+		table.append( row );
+		for(let j=0; j<matrizTable[i].length; j++){
+			if(!isNaN(matrizTable[i][j])){
+				cell = $('<td>'+ (Math.round(matrizTable[i][j]*100)/100 ) +'</td>')
+			}else{
+				cell = $('<td>'+matrizTable[i][j]+'</td>')
+			}
+
+			row.append( cell );
+		}
+	}
+	//save current table html
+	allTables[aux] = $('#divTable'+divName+'')[0].outerHTML ;
 }
 
 function getRestrictionValues(quantDec,quantRes){
