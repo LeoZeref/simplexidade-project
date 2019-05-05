@@ -7,7 +7,6 @@ body{
 	text-align: center;
 	background: rgb(240, 230, 240);
 	color: #000;
-	transition: background-color 5s ease;
 	font-size: 20pt;
 }
 hr{
@@ -31,16 +30,16 @@ table{
 }
 
 table td:first-child {
-	background-color: rgb(51, 133, 196);
+	background: rgb(240, 230, 240);
 }
 
 table tr:first-child {
-	background-color: rgb(51, 133, 196);
+	background: rgb(240, 230, 240);
 }
 
 
 table tr:first-child td:first-child{
-	background-color: rgba(84, 196, 84, 0.986);
+	background: rgb(240, 230, 240);
 }
 
 input::-webkit-outer-spin-button,

@@ -54,8 +54,8 @@ function solveSimplex(quantDec,quantRes,choice){
 		bValues.push(matrizSimplex[i][columnsCount-1])
 	}
 
-	matrizToTable(matrizSimplex,"Inicial",varsOnHead,varsOnBase,rowsCount,allTables,0);
-	tablesCount++
+	// matrizToTable(matrizSimplex,"Inicial",varsOnHead,varsOnBase,rowsCount,allTables,0);
+	// tablesCount++
 
 	do{
 
@@ -97,15 +97,15 @@ function solveSimplex(quantDec,quantRes,choice){
 
 		//show parcial matriz 
 		if(hasNegativeOrPositive == true){
-			matrizToTable(matrizSimplex,"Parcial"+stopConditionValue,varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
+			// matrizToTable(matrizSimplex,"Parcial"+stopConditionValue,varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
 			tablesCount++
 		}
 
 	}while(hasNegativeOrPositive == true);
 
 
-	matrizToTable(matrizSimplex,"Final",varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
-	senseTable(matrizSimplex,varsOnHead,varsOnBase,quantDec,bValues)
+	// matrizToTable(matrizSimplex,"Final",varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
+	// senseTable(matrizSimplex,varsOnHead,varsOnBase,quantDec,bValues)
 	if(choice == 1){
 		$(".container").append(allTables[stopConditionValue]);
 		printResults(matrizSimplex,quantDec,quantRes,columnsCount,varsOnBase);
@@ -118,8 +118,149 @@ function solveSimplex(quantDec,quantRes,choice){
 
 	$(".container").append('<br><div class="row"><div class="col-md-12"><button id="again" class="btn btn-primary" onclick="location.reload();" >Recomeçar</button></div>	</div>')
 	$('body').css({
-		'background-color': 'rgb(46, 90, 110)'
+		'background-color': 'rgb(240, 230, 240)'
 	});
+}
+
+function getLowerNumberAndColumn(matriz,rowCount,columnCount){
+	var column = 0;
+
+	rowCount -= 1;// rowCount now has the correct value to use
+
+	var lowerNumber = matriz[rowCount][0];
+
+	//loop functionZ array to find the lower number value 
+	for (let j = 1 , i = rowCount ; j < columnCount - 1 ; j++) {
+		//make sure that lowerNumber has the lower value
+		if(matriz[i][j] < lowerNumber){
+			lowerNumber = matriz[i][j];
+			column = j;
+		}
+	}
+	return [lowerNumber , column] ;
+}
+
+//null the column elements 
+function nullColumnElements(matriz, pivoRow, pivoColumn,rowsCount, columnsCount){
+
+	for (let i = 0; i < rowsCount; i++) {
+
+		// jumps pivo row and the already 0 values on the pivo column
+		if(i==pivoRow || matriz[i][pivoColumn] == 0 ){
+			continue;
+		}
+		//pivo aux receive  the next pivo column number
+		pivoAux = matriz[i][pivoColumn];
+
+		//loop to null pivo column
+		for (let j = 0; j < columnsCount; j++) {
+			//current matriz value = pivo row values multiplied for negative pivo aux plus actual matriz value
+			matriz[i][j] = (matriz[pivoRow][j] * (pivoAux * -1)) + matriz[i][j] ;
+
+		}
+		
+	}
+	return matriz
+}
+
+
+//div each pivo row value / pivo value
+function divPivoRow(matriz, columnsCount , pivoRow, pivoValue){
+	for (var i = 0; i < columnsCount; i++) {
+		matriz[pivoRow][i]  = matriz[pivoRow][i] / pivoValue;
+	}
+
+	return matriz;
+}
+
+function staticTableVars(quantDec,quantRes){
+	base = [];
+	head = [];
+
+	//for each restriction adds a row into base
+	for (let i = 0; i < quantRes ; i++) {
+		base.push("f"+(i+1));
+	}
+	base.push("Z");
+
+
+	head.push("Base");
+	//for each restriction and decision var adds a row into head
+	for (let i = 0; i < quantDec ; i++) {
+		head.push("x"+(i+1));
+	}
+	for (let i = 0; i < quantRes ; i++) {
+		head.push("f"+(i+1));
+	}
+	head.push("b");
+	
+	return [base, head];
+}
+
+function getRestrictionValues(quantDec,quantRes){
+	var resValues = [];
+	var xvalue = [];
+	for (let i = 1; i <= quantRes; i++ ){
+		xvalue = [];
+
+		for (let j = 1; j <= quantDec; j++ ) {
+			
+			var input = $("input[name='X"+j+"_res"+i+"']").val();
+			
+			if(input.length == 0) {
+				xvalue[j-1] = 0;
+			} else {
+				xvalue[j-1] = parseFloat(input);
+			}
+
+
+		}
+		for (let j= 1; j <= quantRes; j++) {
+			if(i==j){
+				xvalue.push(1);
+			}else{
+				xvalue.push(0);
+			}
+		}
+		
+		var input_res = $("input[name='valRestriction"+i+"']").val();
+		
+		if(input_res.length == 0) {
+			xvalue.push(0);	
+		} else {
+			xvalue.push(parseFloat(input_res));
+		}
+	
+		resValues[i-1] = xvalue;
+		
+	}
+	console.log(resValues);
+	return resValues;
+}
+
+function getFunctionzValues(quantDec,quantRes){
+	var funcValues = [];
+	var xvalue = [];
+
+	var maxOrMin = (($("#max").is(':checked')) ? -1 : 1);
+
+	for (let i = 1; i <= quantDec; i++ ) {
+		var input = $("input[name='valX"+i+"']").val()
+
+		if( input.length == 0) {
+			xvalue[i-1] = 0;			
+		} else {
+			xvalue[i-1] = parseFloat(input) * maxOrMin;
+		}
+
+	}
+	funcValues = xvalue ;
+
+	for (let i = 0; i <= quantRes; i++) {
+		funcValues.push(0);
+	}
+
+	return funcValues;
 }
 
 function printResults(matriz,quantDec,quantRes,columnsCount,base){
@@ -184,7 +325,7 @@ function firstPhase(){
 		$(".container").append('<div id="solution" class="row"></div>')
 		$(".container").append('<br><div class="row"><div id="results" class="col-md"></div></div>');
 
-		$("#buttons").append('<div class="col-md-6"><button id="stepByStep" onclick="solveSimplex('+quantDec+','+quantRes+',2)" class="btn btn-primary">Passo a Passo</button></div>');
+		// $("#buttons").append('<div class="col-md-6"><button id="stepByStep" onclick="solveSimplex('+quantDec+','+quantRes+',2)" class="btn btn-primary">Passo a Passo</button></div>');
 
 	});
 }
@@ -240,5 +381,39 @@ function generateRestrictions(quantDec,quantRes){
 		$("#divRes"+i).append('<span class="px-2"></span><div class="input-group-prepend"><span class="mx-2"><b>&le;</b></span></div><input type="number" name="valRestriction'+i+'">');
 	}
 
+	
+}
+
+// division of b column and the lower number Column
+// adds the var to the base column and returns the lower result row
+function whoLeavesBase(matriz, columnLowerNumber, columnsCount, rowsCount, varsOnBase){
+	var lowerResult = 99999999999999999999999;
+	var lowerResultRow;
+
+	//loop until the last not function Z row
+	for(let i = 0; i < rowsCount-1 ; i++){
+		//not allow div by 0
+		if(!(matriz[i][columnLowerNumber] == 0)){
+			currentValue = 0;
+			currentValue = matriz[i][columnsCount-1] / matriz[i][columnLowerNumber]
+			
+			//make sure that x is positive and lowerResult has the lower value 
+			if(currentValue > 0){
+				if(currentValue < lowerResult){
+					lowerResult    = currentValue;
+					lowerResultRow = i;
+				}
+			}
+
+		}
+	}
+	if(lowerResultRow == undefined){
+		pauseSolution()
+	}else{
+		//adds decision var to the base 
+		
+		varsOnBase[lowerResultRow] = "x"+(columnLowerNumber+1)
+		return [ lowerResultRow, varsOnBase];
+	}
 	
 }
