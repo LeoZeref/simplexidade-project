@@ -15,20 +15,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/simplex.css">
    
-    <title>Simplex</title>
+    <title>Simplexidade</title>
 
   </head>
   <body>
 		<nav class="navbar col-md-12">
-			<span class="text-light">Simplexidade</span>
-			<button onclick="location.reload();" class="btn btn-secondary">Reiniciar</button>
+			<a href="#" onclick="location.reload();" class="main-title text-light">Simplexidade</a href="#">
 		</nav>
 		<br>	
 	  <div class="container align-itens-center">
 			<div id="startInputs">
 				<div class="row">
 					<div class="col-md-12">
-						<p>Este programa consiste na resolução de problemas de maximização e minimização através da utilização do Simplex. Primeiro coloque as quantidades de variáveis, de restriçoes e iterações máximas. Depois coloque os valores das variáveis e das restrições.</p>
+						<p>Este programa consiste na resolução de problemas de maximização e minimização através da utilização do Simplex. Primeiro coloque as quantidades de variáveis, de restrições e iterações máximas. Depois coloque os valores das variáveis e das restrições.</p>
 					</div>
 				  	<div class="col-md-12">
 						<div class="custom-control custom-radio custom-control-inline">
@@ -41,20 +40,23 @@
 					  	</div>
 				  	</div>
 				</div>
-			  	<div class="row">	 
+			  	<div class="row mt-5">	 
 				  	<div class="col-md-4">  
 						<div class="custom-control">
-							<input placeholder="Quantidade de variáveis" type="text" class="form-control m-2"  id="quantidade-variaveis" name="quantDecision">
+							<label>Quantidade de variáveis:</label>
+							<input placeholder="Variáveis" type="text" class="form-control m-2"  id="quantDecision" name="quantDecision">
 					  	</div>				
 				  	</div>
 				  	<div class="col-md-4">				  
 						<div class="custom-control">
-							<input placeholder="Quantidade de restrições" type="text" class="form-control m-2" id="quantidade-restricoes" name="quantRestriction">
+							<label>Quantidade de restrições:</label>
+							<input placeholder="Restrições" type="text" class="form-control m-2" id="quantRestriction" name="quantRestriction">
 					  	</div>
 				  	</div>
 				  	<div class="col-md-4">  
 						<div class="custom-control">
-							<input placeholder="Quantidade de Iterações" type="text" class="form-control m-2" id="quantidade-iteracoes" name="iMax">
+							<label>Quantidade de iterações:</label>
+							<input placeholder="Iterações" type="text" class="form-control m-2" id="iMax" name="iMax">
 					  	</div>	
 				  	</div>
 				</div>
@@ -67,6 +69,7 @@
 				  	</div>
 				</div>
 				<br>
+				<div id="auxDiv" style="display: none;"></div>
 			</div>			
 	  		
 		</div>

@@ -4,10 +4,6 @@ function solveSimplex(quantDec,quantRes,choice){
 	var matrizSimplex = getRestrictionValues(quantDec,quantRes); //get the values of the restriction inputs
 	matrizSimplex.push(getFunctionzValues(quantDec,quantRes)); //get the values of the functionZ inputs
 
-	// console.log(matrizSimplex);
-	//quantDec = 2
-	//quantRes = 4
-
 	var allTables = [];
 
 	var tablesCount = 0;
@@ -20,42 +16,23 @@ function solveSimplex(quantDec,quantRes,choice){
 	if(iMax <= 0){
 		iMax = 20;
 	}
-	console.log(iMax)
 
 	var bValues = []
-
-	//uncomment to test matriz 
-	
-	/*matrizSimplex = [[1,0,1,0,0,4],
-					[0,1,0,1,0,6],
-					[3,2,0,0,1,18],
-					[-3,-5,0,0,0,0]] 
-	matrizSimplex = [[1,0,1,0,0,4],
-				[0,0,0,1,0,6],
-				[3,0,0,0,1,18],
-				[-3,-5,0,0,0,0]]*/
-
-
-	//var matrizSimplex = [[10,12,1,0,0,0,1750],
-	//[0.3,0.5,0,1,0,0,55],[0.2,0.2,0,0,1,0,30],
-	//[12,17,0,0,0,1,10000],[-3.5,-5.2,0,0,0,0,0]]
 
 	staticTblVars = staticTableVars(quantDec,quantRes);
 	varsOnBase = staticTblVars[0];
 
 	varsOnHead = staticTblVars[1];
 
-
 	columnsCount = quantDec + quantRes + 1;
 	rowsCount    = quantRes + 1 ;
 
 	for(let i = 0 ; i < rowsCount; i++){
-		console.log(matrizSimplex[i][columnsCount-1])
 		bValues.push(matrizSimplex[i][columnsCount-1])
 	}
 
-	// matrizToTable(matrizSimplex,"Inicial",varsOnHead,varsOnBase,rowsCount,allTables,0);
-	// tablesCount++
+	matrizToTable(matrizSimplex,"Inicial",varsOnHead,varsOnBase,rowsCount,allTables,0);
+	tablesCount++
 
 	do{
 
@@ -97,15 +74,15 @@ function solveSimplex(quantDec,quantRes,choice){
 
 		//show parcial matriz 
 		if(hasNegativeOrPositive == true){
-			// matrizToTable(matrizSimplex,"Parcial"+stopConditionValue,varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
+			matrizToTable(matrizSimplex,"Parcial"+stopConditionValue,varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
 			tablesCount++
 		}
 
 	}while(hasNegativeOrPositive == true);
 
 
-	// matrizToTable(matrizSimplex,"Final",varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
-	// senseTable(matrizSimplex,varsOnHead,varsOnBase,quantDec,bValues)
+	matrizToTable(matrizSimplex,"Final",varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
+	senseTable(matrizSimplex,varsOnHead,varsOnBase,quantDec,bValues)
 	if(choice == 1){
 		$(".container").append(allTables[stopConditionValue]);
 		printResults(matrizSimplex,quantDec,quantRes,columnsCount,varsOnBase);
@@ -118,9 +95,63 @@ function solveSimplex(quantDec,quantRes,choice){
 
 	$(".container").append('<br><div class="row"><div class="col-md-12"><button id="again" class="btn btn-primary" onclick="location.reload();" >Recomeçar</button></div>	</div>')
 	$('body').css({
-		'background-color': 'rgb(240, 230, 240)'
+		'background-color': 'rgb(170, 200, 210)'
 	});
 }
+
+
+function matrizToTable(matriz, divName, head, base, rowsCount, allTables, aux){
+	$("#auxDiv").html('<div class="row"><div id="divTable'+divName+'" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><div class="row"><h3>Tabela '+divName+':</h3></div><table id="table'+divName+'" class="table table-bordered"></table></div></div>')
+	var table = $("#table"+divName);
+	var row, cell;
+
+	//copy the matriz, base and head values
+	var matrizTable = [];
+	var headTable   = [];
+	var baseTable   = [];
+
+	for (let i = 0; i < matriz.length; i++){
+    	matrizTable[i] = matriz[i].slice();
+	}
+
+	for (let i = 0; i < head.length; i++){
+    	headTable[i] = head[i].slice();
+	}
+
+	for (let i = 0; i < base.length; i++){
+    	baseTable[i] = base[i].slice();
+	}
+
+
+	$("#solveSimplex").remove();
+	$("#stepByStep	").remove();
+
+	//the matriz receives the head and base vars
+	//appends head vars into matriz
+	matrizTable.unshift(headTable);
+	//set base vars at the beggining of each the matriz rows
+	for (let i = 1, j=0; i <= rowsCount; i++, j++){
+		matrizTable[i].unshift(baseTable[j]);
+	} 
+
+	//creates the table
+	for(let i=0; i<matrizTable.length; i++){
+		row = $( '<tr />' );
+		table.append( row );
+		for(let j=0; j<matrizTable[i].length; j++){
+			if(!isNaN(matrizTable[i][j])){
+				cell = $('<td>'+ (Math.round(matrizTable[i][j]*100)/100 ) +'</td>')
+			}else{
+				cell = $('<td>'+matrizTable[i][j]+'</td>')
+			}
+
+			row.append( cell );
+		}
+	}
+	//save current table html
+	allTables[aux] = $('#divTable'+divName+'')[0].outerHTML ;
+}
+
 
 function getLowerNumberAndColumn(matriz,rowCount,columnCount){
 	var column = 0;
@@ -315,58 +346,6 @@ function staticTableVars(quantDec,quantRes){
 	return [base, head];
 }
 
-function matrizToTable(matriz, divName, head, base, rowsCount, allTables, aux){
-	$("#auxDiv").html('<div class="row"><div id="divTable'+divName+'" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><div class="row"><h3>Tabela '+divName+':</h3></div><table id="table'+divName+'" class="table table-bordered"></table></div></div>')
-	var table = $("#table"+divName);
-	var row, cell;
-
-	//copy the matriz, base and head values
-	var matrizTable = [];
-	var headTable   = [];
-	var baseTable   = [];
-
-	for (let i = 0; i < matriz.length; i++){
-    	matrizTable[i] = matriz[i].slice();
-	}
-
-	for (let i = 0; i < head.length; i++){
-    	headTable[i] = head[i].slice();
-	}
-
-	for (let i = 0; i < base.length; i++){
-    	baseTable[i] = base[i].slice();
-	}
-
-
-	$("#solveSimplex").remove();
-	$("#stepByStep	").remove();
-
-	//the matriz receives the head and base vars
-	//appends head vars into matriz
-	matrizTable.unshift(headTable);
-	//set base vars at the beggining of each the matriz rows
-	for (let i = 1, j=0; i <= rowsCount; i++, j++){
-		matrizTable[i].unshift(baseTable[j]);
-	} 
-
-	//creates the table
-	for(let i=0; i<matrizTable.length; i++){
-		row = $( '<tr />' );
-		table.append( row );
-		for(let j=0; j<matrizTable[i].length; j++){
-			if(!isNaN(matrizTable[i][j])){
-				cell = $('<td>'+ (Math.round(matrizTable[i][j]*100)/100 ) +'</td>')
-			}else{
-				cell = $('<td>'+matrizTable[i][j]+'</td>')
-			}
-
-			row.append( cell );
-		}
-	}
-	//save current table html
-	allTables[aux] = $('#divTable'+divName+'')[0].outerHTML ;
-}
-
 function getRestrictionValues(quantDec,quantRes){
 	var resValues = [];
 	var xvalue = [];
@@ -495,7 +474,7 @@ function firstPhase(){
 		$(".container").append('<div id="solution" class="row"></div>')
 		$(".container").append('<br><div class="row"><div id="results" class="col-md"></div></div>');
 
-		// $("#buttons").append('<div class="col-md-6"><button id="stepByStep" onclick="solveSimplex('+quantDec+','+quantRes+',2)" class="btn btn-primary">Passo a Passo</button></div>');
+		$("#buttons").append('<div class="col-md-6"><button id="stepByStep" onclick="solveSimplex('+quantDec+','+quantRes+',2)" class="btn btn-primary">Passo a Passo</button></div>');
 
 	});
 }

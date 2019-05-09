@@ -5,7 +5,7 @@
 body{
 	font-family: Quicksand;
 	text-align: center;
-	background: rgb(240, 230, 240);
+	background: rgb(170, 200, 210);
 	color: #000;
 	font-size: 20pt;
 }
@@ -66,4 +66,8 @@ span.input-group-text{
 
 button#firstPhase, button#solveSimplex, button#stepByStep, button#again {
 	font-size: 18pt;
+}
+
+.main-title {
+	text-decoration: none;
 }
