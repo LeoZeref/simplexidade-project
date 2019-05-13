@@ -566,3 +566,9 @@ function whoLeavesBase(matriz, columnLowerNumber, columnsCount, rowsCount, varsO
 	}
 	
 }
+function pauseSolution(){
+	$(".container").remove()
+
+	$("body").append('<div class="container"><div class="row"><div class="offset-md-2 col-md-8 offset-md-2"><h1>Solução impossível</h1></div></div></div>');
+	$(".container").append('<div class="row"><div class="offset-md-4 col-md-4 offset-md-4"><button id="back" class="btn btn-primary" onclick="location.reload();" >Voltar</button></div>	</div>')
+}
