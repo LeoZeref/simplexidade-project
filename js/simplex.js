@@ -250,24 +250,24 @@ function senseTable(matriz, head, base,quantDec,bValues){
 
 
 	senseMatriz.unshift(['Recursos','Preco Sombra','Min','Max','Inicial']);
-	$(".container").append('<div class="row"><h3>Tabela Final</h3></div>')
-	$(".container").append('<div class="row"><div id="divFinalTableBegin" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><table id="finalTableBegin" class="table table-bordered"></table></div></div>')
-	var table = $("#finalTableBegin");
-	var row, cell;
+	// $(".container").append('<div class="row"><h3>Tabela Final</h3></div>')
+	// $(".container").append('<div class="row"><div id="divFinalTableBegin" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><table id="finalTableBegin" class="table table-bordered"></table></div></div>')
+	// var table = $("#finalTableBegin");
+	// var row, cell;
 
-	for(let i=0; i< matrizTable.length; i++){
-		row = $( '<tr />' );
-		table.append( row );
-		for(let j=0; j<matrizTable[i].length; j++){
-			if(!isNaN(matrizTable[i][j])){
-				cell = $('<td>'+ (Math.round(matrizTable[i][j]*100)/100 ) +'</td>')
-			}else{
-				cell = $('<td>'+matrizTable[i][j]+'</td>')
-			}
+	// for(let i=0; i< matrizTable.length; i++){
+	// 	row = $( '<tr />' );
+	// 	table.append( row );
+	// 	for(let j=0; j<matrizTable[i].length; j++){
+	// 		if(!isNaN(matrizTable[i][j])){
+	// 			cell = $('<td>'+ (Math.round(matrizTable[i][j]*100)/100 ) +'</td>')
+	// 		}else{
+	// 			cell = $('<td>'+matrizTable[i][j]+'</td>')
+	// 		}
 
-			row.append( cell );
-		}
-	}
+	// 		row.append( cell );
+	// 	}
+	// }
 
 	$(".container").append('<hr><div class="row"><h3>Tabela de Sensibilidade</h3></div>')
 	$(".container").append('<div class="row"><div id="divSenseTable" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><table id="senseTable" class="table table-bordered"></table></div></div><hr>')
@@ -469,7 +469,7 @@ function firstPhase(){
 		generateRestrictions(quantDec,quantRes);
 
 		//adds a button that calls the second phase of the process
-		$("#inputValues").append('<div id="buttons" class="row"><div class="col-md-12 col-lg-12"><button id="solveSimplex" align="center" onclick="solveSimplex('+quantDec+','+quantRes+',1)" class="btn btn-primary">Solução</button></div></div>');
+		$("#inputValues").append('<div id="buttons" class="row"><div class="col-md-6 col-lg-6"><button id="solveSimplex" onclick="solveSimplex('+quantDec+','+quantRes+',1)" class="btn btn-primary">Solução</button></div></div>');
 
 		$(".container").append('<div id="solution" class="row"></div>')
 		$(".container").append('<br><div class="row"><div id="results" class="col-md"></div></div>');

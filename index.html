@@ -56,7 +56,7 @@
 				  	<div class="col-md-4">  
 						<div class="custom-control">
 							<label>Quantidade de iterações:</label>
-							<input placeholder="Iterações" type="text" class="form-control m-2" id="iMax" name="iMax">
+							<input value="100" placeholder="Iterações" type="text" class="form-control m-2" id="iMax" name="iMax">
 					  	</div>	
 				  	</div>
 				</div>
@@ -81,10 +81,10 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 	<script type="text/javascript">
 		function verifyValues() {
-			if($('#quantidade-restricoes').val() > 10 ||
-				$('#quantidade-restricoes').val() < 1  ||
-				$('#quantidade-variaveis').val() > 10 ||
-				$('#quantidade-variaveis').val() < 1) {
+			if($('#quantRestriction').val() > 10 ||
+				$('#quantRestriction').val() < 1  ||
+				$('#quantDecision').val() > 10 ||
+				$('#quantDecision').val() < 1) {
 				alert('Quantidade de variáveis de Decisão ou Restrição maior que 10 ou menor que 1');
 			} else {
 				firstPhase()

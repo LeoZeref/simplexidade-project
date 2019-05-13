@@ -30,16 +30,16 @@ table{
 }
 
 table td:first-child {
-	background-color: rgb(51, 133, 196);
+	background-color: rgb(0,191,255);
 }
 
 table tr:first-child {
-	background-color: rgb(51, 133, 196);
+	background-color: rgb(0,191,255);
 }
 
 
 table tr:first-child td:first-child{
-	background-color: rgba(84, 196, 84, 0.986);
+	background-color: rgb(238,130,238);
 }
 
 input::-webkit-outer-spin-button,
