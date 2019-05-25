@@ -269,6 +269,8 @@ function senseTable(matriz, head, base,quantDec,bValues){
 		}
 	})
 
+	var fAtualizado = []
+
 	$(arrayArray).each(function (index, value) {
 		$(senseMatriz).each(function (index1, value1) {
 		
@@ -278,12 +280,12 @@ function senseTable(matriz, head, base,quantDec,bValues){
 					var position = value1.indexOf(value[0]);
 
 					value1.push(value[1])
-				}else{
-					console.log(value1[0])
-					console.log(value1.length)
-					if(value1.length < 6){
-						value1.push(0)
-					}
+					fAtualizado.push(value[0])
+
+				}else if(value1.length < 6 && !fAtualizado.includes(value[0])){
+					
+					value1.push(0)
+				
 				}
 			}
 		})
