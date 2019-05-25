@@ -83,6 +83,8 @@ function solveSimplex(quantDec,quantRes,choice){
 
 	matrizToTable(matrizSimplex,"Final",varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
 	senseTable(matrizSimplex,varsOnHead,varsOnBase,quantDec,bValues)
+
+
 	if(choice == 1){
 		$(".container").append(allTables[stopConditionValue]);
 		printResults(matrizSimplex,quantDec,quantRes,columnsCount,varsOnBase);
@@ -104,7 +106,7 @@ function matrizToTable(matriz, divName, head, base, rowsCount, allTables, aux){
 	$("#auxDiv").html('<div class="row"><div id="divTable'+divName+'" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><div class="row"><h3>Tabela '+divName+':</h3></div><table id="table'+divName+'" class="table table-bordered"></table></div></div>')
 	var table = $("#table"+divName);
 	var row, cell;
-
+	
 	//copy the matriz, base and head values
 	var matrizTable = [];
 	var headTable   = [];
@@ -173,7 +175,6 @@ function getLowerNumberAndColumn(matriz,rowCount,columnCount){
 
 function senseTable(matriz, head, base,quantDec,bValues){
 
-
 	var matrizTable = [];
 	var headTable   = [];
 	var baseTable   = [];
@@ -181,7 +182,6 @@ function senseTable(matriz, head, base,quantDec,bValues){
 	var restNames  = []
 	var restValues = []
 	var minMaxValues = []
-
 
 	for (let i = 0; i < matriz.length; i++){
     	matrizTable[i] = matriz[i].slice();
@@ -248,26 +248,49 @@ function senseTable(matriz, head, base,quantDec,bValues){
 	}
 
 
+	var arrayArray = []
 
-	senseMatriz.unshift(['Recursos','Preco Sombra','Min','Max','Inicial']);
-	// $(".container").append('<div class="row"><h3>Tabela Final</h3></div>')
-	// $(".container").append('<div class="row"><div id="divFinalTableBegin" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><table id="finalTableBegin" class="table table-bordered"></table></div></div>')
-	// var table = $("#finalTableBegin");
-	// var row, cell;
+	senseMatriz.unshift(['Recursos','Preco Sombra','Min','Max','Inicial', `Final`]);
+	$(senseMatriz).each(function (index, value) {
+		if (index !== 0) {
+			if (varsOnBase.includes(value[0])) {
+				var position = varsOnBase.indexOf(value[0]);
+				var lengthX = matriz[position].length;
+				var valor = matriz[position][lengthX-1];
 
-	// for(let i=0; i< matrizTable.length; i++){
-	// 	row = $( '<tr />' );
-	// 	table.append( row );
-	// 	for(let j=0; j<matrizTable[i].length; j++){
-	// 		if(!isNaN(matrizTable[i][j])){
-	// 			cell = $('<td>'+ (Math.round(matrizTable[i][j]*100)/100 ) +'</td>')
-	// 		}else{
-	// 			cell = $('<td>'+matrizTable[i][j]+'</td>')
-	// 		}
 
-	// 		row.append( cell );
-	// 	}
-	// }
+				var  finalArray = [];
+
+				finalArray.push(value[0], valor)
+				arrayArray.push(finalArray)
+				
+
+			}
+		}
+	})
+
+	$(arrayArray).each(function (index, value) {
+		$(senseMatriz).each(function (index1, value1) {
+		
+			if (index1 !== 0) {
+				if (value1.includes(value[0])) {
+
+					var position = value1.indexOf(value[0]);
+
+					value1.push(value[1])
+				}else{
+					console.log(value1[0])
+					console.log(value1.length)
+					if(value1.length < 6){
+						value1.push(0)
+					}
+				}
+			}
+		})
+	})
+
+
+	console.log(arrayArray);
 
 	$(".container").append('<hr><div class="row"><h3>Tabela de Sensibilidade</h3></div>')
 	$(".container").append('<div class="row"><div id="divSenseTable" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><table id="senseTable" class="table table-bordered"></table></div></div><hr>')
@@ -383,7 +406,6 @@ function getRestrictionValues(quantDec,quantRes){
 		resValues[i-1] = xvalue;
 		
 	}
-	console.log(resValues);
 	return resValues;
 }
 
