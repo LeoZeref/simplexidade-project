@@ -273,26 +273,28 @@ function senseTable(matriz, head, base,quantDec,bValues){
 
 	$(arrayArray).each(function (index, value) {
 		$(senseMatriz).each(function (index1, value1) {
-		
 			if (index1 !== 0) {
-				if (value1.includes(value[0])) {
-
-					var position = value1.indexOf(value[0]);
-
+				console.log('fAtualizado')
+				console.log(fAtualizado)
+				console.log('value')
+				console.log(value)
+				console.log('value1')
+				console.log(value1)
+				if (value1.includes(value[0], 0) && !fAtualizado.includes(value1[0], 0)) {
+					console.log('primeiroIf')
 					value1.push(value[1])
-					fAtualizado.push(value[0])
+					fAtualizado.push(value1[0])
 
-				}else if(value1.length < 6 && !fAtualizado.includes(value[0])){
-					
-					value1.push(0)
+				}else if(!fAtualizado.includes(value1[0], 0) && value1.length < 6){
+					console.log('segundoIf')
+					value1.push('0')
+					fAtualizado.push(value1[0])
 				
 				}
 			}
 		})
 	})
 
-
-	console.log(arrayArray);
 
 	$(".container").append('<hr><div class="row"><h3>Tabela de Sensibilidade</h3></div>')
 	$(".container").append('<div class="row"><div id="divSenseTable" class="offset-md-2 col-md-8 offset-md-2 table-responsive"><table id="senseTable" class="table table-bordered"></table></div></div><hr>')
