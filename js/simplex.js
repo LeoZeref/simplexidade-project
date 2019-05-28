@@ -82,17 +82,18 @@ function solveSimplex(quantDec,quantRes,choice){
 
 
 	matrizToTable(matrizSimplex,"Final",varsOnHead,varsOnBase,rowsCount,allTables,tablesCount);
-	senseTable(matrizSimplex,varsOnHead,varsOnBase,quantDec,bValues)
+	senseTable(matrizSimplex,varsOnHead,varsOnBase,quantDec,bValues);
 
 
 	if(choice == 1){
 		$(".container").append(allTables[stopConditionValue]);
-		printResults(matrizSimplex,quantDec,quantRes,columnsCount,varsOnBase);
+		printResults(matrizSimplex,quantDec,quantRes,columnsCount,varsOnBase, varsOnHead);
+
 	}else{
 		for (let i = 0 ; i < allTables.length; i++) {
 			$(".container").append(allTables[i]);
 		}	
-		printResults(matrizSimplex,quantDec,quantRes,columnsCount,varsOnBase);
+		printResults(matrizSimplex,quantDec,quantRes,columnsCount,varsOnBase, varsOnHead);
 	}
 
 	$(".container").append('<br><div class="row"><div class="col-md-12"><button id="again" class="btn btn-primary" onclick="location.reload();" >Recomeçar</button></div>	</div>')
@@ -274,19 +275,11 @@ function senseTable(matriz, head, base,quantDec,bValues){
 	$(arrayArray).each(function (index, value) {
 		$(senseMatriz).each(function (index1, value1) {
 			if (index1 !== 0) {
-				console.log('fAtualizado')
-				console.log(fAtualizado)
-				console.log('value')
-				console.log(value)
-				console.log('value1')
-				console.log(value1)
 				if (value1.includes(value[0], 0) && !fAtualizado.includes(value1[0], 0)) {
-					console.log('primeiroIf')
 					value1.push(value[1])
 					fAtualizado.push(value1[0])
 
 				}else if(!fAtualizado.includes(value1[0], 0) && value1.length < 6){
-					console.log('segundoIf')
 					value1.push('0')
 					fAtualizado.push(value1[0])
 				
@@ -438,7 +431,7 @@ function getFunctionzValues(quantDec,quantRes){
 	return funcValues;
 }
 
-function printResults(matriz,quantDec,quantRes,columnsCount,base){
+function printResults(matriz,quantDec,quantRes,columnsCount,base, head){
 
 	if(($("#min").is(':checked'))){
 		var zValue = matriz[matriz.length-1][columnsCount-1] * -1;
@@ -455,6 +448,13 @@ function printResults(matriz,quantDec,quantRes,columnsCount,base){
 		var baseValue = matriz[i][columnsCount-1];
 		$("#results").append('<div>'+baseName+'='+baseValue+'</div>')
 	}
+
+	$(head).each(function (i, value) {
+		if (!base.includes(value) && value != 'Base') {
+			var headName = value;
+			$("#results").append('<div>'+headName+'= 0</div>');
+		}
+	})
 
 }
 
