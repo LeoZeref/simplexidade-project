@@ -5,7 +5,7 @@
 body{
 	font-family: Quicksand;
 	text-align: center;
-	background: rgb(170, 200, 210);
+	background: rgb(255, 222, 224);
 	color: #000;
 	font-size: 20pt;
 }
@@ -19,7 +19,8 @@ hr{
 input#iMax:focus + .hint { display :  block }
 
 .navbar {
-	background-color: rgb(51, 133, 196);}
+	background-color: rgb(194, 81, 79);
+}
 
 #tableInicial{
 	margin-top: 10px;
