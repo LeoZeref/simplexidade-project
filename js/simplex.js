@@ -224,10 +224,10 @@ function senseTable(matriz, head, base,quantDec,bValues){
 			}	
 		}
 		if(minPos === Number.POSITIVE_INFINITY ){
-			minPos = 0
+			minPos = 'Infinito'
 		}
 		if(maxNeg === Number.NEGATIVE_INFINITY ){
-			maxNeg = 0
+			maxNeg = 'Infinito'
 		}
 		minMaxValues.push([maxNeg + bValues[k] ,minPos + bValues[k]])
 	}
@@ -282,8 +282,17 @@ function senseTable(matriz, head, base,quantDec,bValues){
 				}else if(!fAtualizado.includes(value1[0], 0) && value1.length < 6){
 					value1.push('0')
 					fAtualizado.push(value1[0])
-				
 				}
+			for (let i=0; value1.length; i++) {
+				console.log(value1[i])
+				// if (value1[i].includes('Infinito'))
+				// 	value1[i] = 'Infinito'
+			}
+			}
+			for (let i=0; fAtualizado.length; i++) {
+				console.log(fAtualizado[i])
+				// if (fAtualizado[i].includes('Infinito'))
+				// 	fAtualizado[i] = 'Infinito'
 			}
 		})
 	})
