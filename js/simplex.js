@@ -275,6 +275,7 @@ function senseTable(matriz, head, base,quantDec,bValues){
 	$(arrayArray).each(function (index, value) {
 		$(senseMatriz).each(function (index1, value1) {
 			if (index1 !== 0) {
+
 				if (value1.includes(value[0], 0) && !fAtualizado.includes(value1[0], 0)) {
 					value1.push(value[1])
 					fAtualizado.push(value1[0])
@@ -282,17 +283,8 @@ function senseTable(matriz, head, base,quantDec,bValues){
 				}else if(!fAtualizado.includes(value1[0], 0) && value1.length < 6){
 					value1.push('0')
 					fAtualizado.push(value1[0])
+				
 				}
-			for (let i=0; value1.length; i++) {
-				console.log(value1[i])
-				// if (value1[i].includes('Infinito'))
-				// 	value1[i] = 'Infinito'
-			}
-			}
-			for (let i=0; fAtualizado.length; i++) {
-				console.log(fAtualizado[i])
-				// if (fAtualizado[i].includes('Infinito'))
-				// 	fAtualizado[i] = 'Infinito'
 			}
 		})
 	})
