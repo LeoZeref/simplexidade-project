@@ -243,7 +243,10 @@ function senseTable(matriz, head, base,quantDec,bValues){
 
 	for(let i = 0; i< senseMatriz.length; i++ ){
 		for(let j = 0; j < minMaxValues[0].length; j++){
-			senseMatriz[i].push(minMaxValues[i][j])
+			if (minMaxValues[i][j].toString().substring(0, 8) == 'Infinito')
+				senseMatriz[i].push('Infinito')	
+			else
+				senseMatriz[i].push(minMaxValues[i][j])
 		}
 		senseMatriz[i].push(bValues[i]);
 	}
