@@ -453,7 +453,8 @@ function printResults(matriz,quantDec,quantRes,columnsCount,base, head){
 	$(head).each(function (i, value) {
 		if (!base.includes(value) && value != 'Base') {
 			var headName = value;
-			$("#results").append('<div>'+headName+'= 0</div>');
+			if (headName !== 'b')
+				$("#results").append('<div>'+headName+'= 0</div>');
 		}
 	})
 
