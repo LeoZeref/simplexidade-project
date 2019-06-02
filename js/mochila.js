@@ -32,7 +32,7 @@ function firstPhase(){
 		generateRestrictions(quantObj);
 		
 		//adds a button that calls the second phase of the process
-		$("#inputValues").append('<div id="buttons" class="row"><div class="col-md-6 col-lg-6"><button id="solveSimplex" onclick="processData('+pesoMax+','+quantObj+',1)" class="btn btn-primary">Solução</button></div></div>');
+		$("#inputValues").append('<div id="buttons" class="row"><div class="col-md-12 col-lg-12"><button id="solveSimplex" onclick="processData('+pesoMax+','+quantObj+',1)" class="btn btn-secondary">Solução</button></div></div>');
 
 		$(".container").append('<div id="solution" class="row"></div>')
 		$(".container").append('<br><div class="row"><div id="results" class="col-md"></div></div>');
@@ -117,7 +117,9 @@ function processData(capacidade, totalObjs) {
 	var div = $('#inputValues').append('Itens a serem levados: ');
 
 	for (let j = 0; j < result.subset.length; j++) {
-		var res = result.subset[j].nome;
-		$('#inputValues').append(res + ' ');
+		var res = result.subset[j];
+		$('#inputValues').append('<div class="row"><div class="col-md-12 text-center">- ' + res.nome + ' de valor: ' + res.v + '</div></div>');
 	}
+	$('#solveSimplex').addClass('d-none')
+	$(".container").append('<br><div class="row"><div class="col-md-12"><button id="again" class="btn btn-secondary" onclick="location.reload();" >Recomeçar</button></div>	</div>')
 }
