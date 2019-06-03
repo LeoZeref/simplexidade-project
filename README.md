@@ -1,9 +1,15 @@
-# Nome da Aplicação
+# Simplexidade e Mochila
 
 Repositório para a implementação do algoritmo Simplex e Mochila.
 
 Projeto de Pesquisa Operacional
 5º Semestre BCC UNIVEM
+
+[Aplicação do Simplexidade e Mochila](https://simplexidade-mochila.herokuapp.com)
+
+- Vitor Hideki Yamamoto Tiba    RA 569720  
+- Mônica Gregório Colomera RA 570265  
+- Leonardo Marques Bortolotti   RA 569828
 
 O Simplex permite que se encontre valores ideais em situações em que diversos aspectos precisam ser respeitados. Diante de um problema, são estabelecidas inequações que representam restrições para as variáveis. A partir daí, testa-se possibilidades de maneira a otimizar, isto é, maximizar ou minimizar o resultado da forma mais rápida possível.
 
@@ -19,46 +25,43 @@ O algoritmo da mochila consiste em preencher a mochila com objetos diferentes de
 
 ## Nota de realease a ser publicado
 
-###Simplex
+### Simplex
 
 - Algoritmo Simplex para problemas de maximização.
 - Algoritmo Simplex para problemas de minimização.
 - É exibido o passo a passo das tabelas geradas pelo método Simplex
 - Tabela de Sensibilidade.
 
-###Mochila
+### Mochila
 
 - Apreentação da solução, dos itens a serem considerados e a tabela de cálculo.
 
 
-##Entradas personalizadas para:
+## Entradas personalizadas para:
 
-###Simplex
+### Simplex
 
 - Limite máximo de iterações
 - Tipo de Simplex (MAX ou MIN)
 - Quantidade de variáveis e restrições
 
-###Mochila
+### Mochila
 - Capacidade da mochila
 - Peso e valor dos itens
 
-##Limitações
+## Limitações
 
-###Simplex
+### Simplex
 
 - Em cada variável da função objetivo e das restrições deve conter apenas o número, sem a adição do 'x', separando os números por ';' e caso tenha alguma variável nula, é necessário inserir o 0.
 
+### Mochila
 
-###Mochila
-
-- Não utilizar itens com pesos iguais
 - Serão permitidos somente valores inteiros
 
+## Datas Importantes
 
-##Datas Importantes
-
-###Simplex
+### Simplex
 
 Datas | Eventos
 --------- | ------
@@ -69,7 +72,7 @@ Datas | Eventos
 23/04/19     | Mvp 1, funcionalidades 1 e 2
 03/06/19     | Entrega da funcionalidade
 
-###Mochila
+### Mochila
 
 Datas | Eventos
 --------- | ------
@@ -77,14 +80,14 @@ Datas | Eventos
 03/06/19     | Entrega da funcionalidade
 
 
-##Compatibilidade
+## Compatibilidade
 
 Requisitos | Ferramentas
 --------- | ------
 Navegadores     | Mozila Firefox, Chrome, Internet Explorer
 Sistema Operacional    | Ubuntu, Windows, Mac, RedHat
 
-##Tecnologias
+## Tecnologias
 
 Tecnologias | Ferramentas
 --------- | ------
@@ -93,9 +96,9 @@ Back-End    | Javascript
 Editor de Texto  |  Sublime
 Servidor Web    | https://github.io/
 
-##Atividades Realizadas no Período
+## Atividades Realizadas no Período
 
-###Simplex
+### Simplex
 
 Código | Título | Tarefa | Situação | Observação
 --------- | ------ | -------| -------| -------
@@ -107,7 +110,7 @@ Código | Título | Tarefa | Situação | Observação
 6 | Permite escolha de número de variáveis e restrições |Permite a escolha das variaveis e restrições ao usuario | Concluído|
 7 | Obtenção do resultado ótimo | Demonstrar ao usuário do resultado ótimo | Concluído|
 
-###Mochila
+### Mochila
 
 Código | Título | Tarefa | Situação | Observação
 --------- | ------ | -------| -------| -------
