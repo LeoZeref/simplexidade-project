@@ -62,13 +62,19 @@ O algoritmo da mochila consiste em preencher a mochila com objetos diferentes de
 
 Datas | Eventos
 --------- | ------
-30/03/16     | Início do Planejamento
+30/03/19     | Início do Planejamento
+23/04/19     | Mvp 1, funcionalidades 1 e 2
+06/05/19     | Mvp 2, funcionalidades 3 e 8
+15/05/19     | Mvp 3, funcionalidades 4 e 7
+23/04/19     | Mvp 1, funcionalidades 1 e 2
+03/06/19     | Entrega da funcionalidade
 
 ###Mochila
 
 Datas | Eventos
 --------- | ------
-05/06/16     | Início do Planejamento
+27/05/19     | Início do Planejamento
+03/06/19     | Entrega da funcionalidade
 
 
 ##Compatibilidade
