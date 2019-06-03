@@ -20,6 +20,7 @@ O algoritmo da mochila consiste em preencher a mochila com objetos diferentes de
 
 - Javascript
 - JQuery
+- Bootstrap
 - GitHub para versionamento
 - Heroku para hospedagem
 
