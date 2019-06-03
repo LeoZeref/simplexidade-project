@@ -9,7 +9,7 @@ Projeto de Pesquisa Operacional
 
 - Vitor Hideki Yamamoto Tiba    RA 569720  
 - Mônica Gregório Colomera RA 570265  
-- Leonardo Marques Bortolotti   RA 569828
+- Leonardo Marques Bortolotti   RA 568929
 
 O Simplex permite que se encontre valores ideais em situações em que diversos aspectos precisam ser respeitados. Diante de um problema, são estabelecidas inequações que representam restrições para as variáveis. A partir daí, testa-se possibilidades de maneira a otimizar, isto é, maximizar ou minimizar o resultado da forma mais rápida possível.
 
@@ -26,7 +26,7 @@ O algoritmo da mochila consiste em preencher a mochila com objetos diferentes de
 
 ## Nota de realease a ser publicado
 
-### Simplex
+### implex
 
 - Algoritmo Simplex para problemas de maximização.
 - Algoritmo Simplex para problemas de minimização.
@@ -36,7 +36,6 @@ O algoritmo da mochila consiste em preencher a mochila com objetos diferentes de
 ### Mochila
 
 - Apreentação da solução, dos itens a serem considerados e a tabela de cálculo.
-
 
 ## Entradas personalizadas para:
 
