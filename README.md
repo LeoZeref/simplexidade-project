@@ -26,7 +26,7 @@ O algoritmo da mochila consiste em preencher a mochila com objetos diferentes de
 
 ## Nota de realease a ser publicado
 
-### implex
+### Simplex
 
 - Algoritmo Simplex para problemas de maximização.
 - Algoritmo Simplex para problemas de minimização.
@@ -35,7 +35,7 @@ O algoritmo da mochila consiste em preencher a mochila com objetos diferentes de
 
 ### Mochila
 
-- Apreentação da solução, dos itens a serem considerados e a tabela de cálculo.
+- Apresentação da solução, dos itens a serem considerados e a tabela de cálculo.
 
 ## Entradas personalizadas para:
 
